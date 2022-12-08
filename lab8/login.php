@@ -5,11 +5,12 @@
   if ($user && $pass) {
     require_once('mysql.php');
     $connection = connect();
-    $username = login($connection, $user, $pass);
+    $user = login($connection, $user, $pass);
 
-    if ($username !== false) {
+    if ($user !== false) {
       session_start();
-      $_SESSION['user'] = $username;
+      $_SESSION['user'] = $user['username'];
+      $_SESSION['userId'] = $user['id'];
       header('Location: index.php');
     } else {
       $msg = 'Credentiale invalide. Pls try again.';
